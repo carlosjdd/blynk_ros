@@ -31,8 +31,16 @@ blynk = BlynkLib.Blynk(BLYNK_AUTH)
 
 # Register virtual pin handler
 @blynk.on("V3")
-def v3_write_handler(value):
-    print('Current slider value: {}'.format(value[0]))
+#def v3_write_handler(value):
+#    print('Current slider value: {}'.format(value[0]))
+def v3_slicer(value):
+    x = value[0]
+    print(x)
+
+@blynk.on("V4")
+def v4_button(value):
+    x = value[0]
+    print(x)
 
 while True:
     blynk.run()
