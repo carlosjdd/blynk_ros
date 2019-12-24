@@ -19,10 +19,15 @@ def v3_slicer(value):
 
 @blynk.on("V4")
 def v4_button(value):
-    if value[0] == 0:
+    print ("Han pulsado el boton")
+    print(value[0])
+    x = value[0]
+    if x == "0":
+        print ("El valor es 0")
         aux = False
     else:
         aux = True
+        print ("El valor es 1")
     pub.publish(aux)
 
 if __name__ == '__main__':
