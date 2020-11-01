@@ -47,12 +47,12 @@ class printer():
 
     # Register virtual pin handler
     @blynk.on("V3")
-    def v3_slicer(self, value):
+    def v3_slicer(value):
         x = value[0]
         print(x)
 
     @blynk.on("V4")
-    def v4_button(self, value):
+    def v4_button(value):
         print ("Han pulsado el boton")
         print(value[0])
         x = value[0]
