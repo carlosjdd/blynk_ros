@@ -72,7 +72,7 @@ if __name__=='__main__':
     try:
         rospy.init_node('blink_printer')       # Init ROS node
 
-        blynk_printer = class_name()
+        blynk_printer = printer()
         rospy.on_shutdown(blynk_printer.stopping_node)   #When ROS is closed, this void is executed
 
         blynk_printer.run_loop()
