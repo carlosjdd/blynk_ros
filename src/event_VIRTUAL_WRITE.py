@@ -31,7 +31,7 @@ def v4_button(value):
     pub.publish(aux)
 
 if __name__ == '__main__':
-    pub = rospy.Publisher('switch_printer', Bool, queue_size=10)
     rospy.init_node('blynk_printer', anonymous=True)
+    pub = rospy.Publisher('switch_printer', Bool, queue_size=10)
     while True:
         blynk.run()
