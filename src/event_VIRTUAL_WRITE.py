@@ -22,29 +22,31 @@ def v4_button(value):
         aux = False
     else:
         aux = True
-    pub.publish(aux)
+    print_pub.publish(aux)
 
 
 @blynk.on("V4")
 def v4_button(value):
     print("RED: " + value[0])
     rgb.data[0] = value[0]
-    pub.publish(rgb.data)
+    leds_pub.publish(rgb.data)
 
 @blynk.on("V5")
 def v4_button(value):
     print("GREEN: " + value[0])
     rgb.data[1] = value[0]
-    pub.publish(rgb.data)
+    leds_pub.publish(rgb.data)
 
 @blynk.on("V6")
 def v4_button(value):
     print("RED: " + value[0])
     rgb.data[2] = value[0]
-    pub.publish(rgb.data)
+    leds_pub.publish(rgb.data)
 
 if __name__ == '__main__':
     rospy.init_node('blynk_printer', anonymous=True)
-    pub = rospy.Publisher('switch_printer', Bool, queue_size=10)
+    print_pub = rospy.Publisher('switch_printer', Bool, queue_size=10)
+    leds_pub = rospy.Publisher('switch_rgb', Int16MultiArray, queue_size=10)
+
     while True:
         blynk.run()
