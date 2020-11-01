@@ -39,6 +39,12 @@ class printer():
             #functions to repeat until the node is closed
             blynk.run()
 
+    def stopping_node(self):
+        """ROS closing node
+
+        Is the function called when ROS node is closed."""
+        print("\n\nBye bye! :)\n\n")
+
     # Register virtual pin handler
     @blynk.on("V3")
     def v3_slicer(self, value):
