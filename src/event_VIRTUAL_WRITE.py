@@ -2,6 +2,7 @@
 
 import rospy
 from std_msgs.msg import Bool
+from std_msgs.msg import Int16MultiArray
 import BlynkLib
 
 BLYNK_AUTH = 'gASisGlaGebx-uTQn6zKU0H1Fw45v4aj'
@@ -9,26 +10,38 @@ BLYNK_AUTH = 'gASisGlaGebx-uTQn6zKU0H1Fw45v4aj'
 # Initialize Blynk
 blynk = BlynkLib.Blynk(BLYNK_AUTH)
 
-# Register virtual pin handler
-@blynk.on("V3")
-#def v3_write_handler(value):
-#    print('Current slider value: {}'.format(value[0]))
-def v3_slicer(value):
-    x = value[0]
-    print(x)
+rgb = Int16MultiArray()
+rgb.data=[0,0,0]
 
-@blynk.on("V4")
+#Button for printer is pressed
+@blynk.on("V3")
 def v4_button(value):
-    print ("Han pulsado el boton")
-    print(value[0])
+    print("ON: " + value[0])
     x = value[0]
     if x == "0":
-        print ("El valor es 0")
         aux = False
     else:
         aux = True
-        print ("El valor es 1")
     pub.publish(aux)
+
+
+@blynk.on("V4")
+def v4_button(value):
+    print("RED: " + value[0])
+    rgb.data[0] = value[0]
+    pub.publish(rgb.data)
+
+@blynk.on("V5")
+def v4_button(value):
+    print("GREEN: " + value[0])
+    rgb.data[1] = value[0]
+    pub.publish(rgb.data)
+
+@blynk.on("V6")
+def v4_button(value):
+    print("RED: " + value[0])
+    rgb.data[2] = value[0]
+    pub.publish(rgb.data)
 
 if __name__ == '__main__':
     rospy.init_node('blynk_printer', anonymous=True)
