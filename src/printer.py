@@ -7,6 +7,11 @@ import BlynkLib
 # import the necessary msgs. Example with msg type String_Int_Arrays:
 from std_msgs.msg import Bool
 
+BLYNK_AUTH = 'gASisGlaGebx-uTQn6zKU0H1Fw45v4aj'
+
+        # Initialize Blynk
+blynk = BlynkLib.Blynk(BLYNK_AUTH)
+
 class printer():
     """ Class class_name.
 
@@ -22,15 +27,7 @@ class printer():
         #Subscribe to ROS topics
         self.printer_pub = rospy.Publisher('switch_printer', Bool, queue_size=10)
 
-        self.configuration()
-
         print("[INFO] Node started")
-
-    def configuration(self):
-        BLYNK_AUTH = 'gASisGlaGebx-uTQn6zKU0H1Fw45v4aj'
-
-        # Initialize Blynk
-        self.blynk = BlynkLib.Blynk(BLYNK_AUTH)
 
 
     def run_loop(self):
@@ -40,15 +37,15 @@ class printer():
         """
         while not rospy.is_shutdown():
             #functions to repeat until the node is closed
-            self.blynk.run()
+            blynk.run()
 
     # Register virtual pin handler
-    @self.blynk.on("V3")
+    @blynk.on("V3")
     def v3_slicer(self, value):
         x = value[0]
         print(x)
 
-    @self.blynk.on("V4")
+    @blynk.on("V4")
     def v4_button(self, value):
         print ("Han pulsado el boton")
         print(value[0])
